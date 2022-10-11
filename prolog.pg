@@ -1,0 +1,18 @@
+RULE                : TITLE ":-" LISTPREDICATES;
+LISTPREDICATES      : PREDICATE SUFFIX | LISTPREDICATES PREDICATE SUFFIX;
+PREDICATE           : PREDICATENAME | PREDICATENAME "(" LISTARGS ")" | NOT "(" PREDICATE ")" | ARITHMETICPREDICATE | LOGICPREDICATE;
+NOT                 : "not";
+ARITHMETICPREDICATE : ARG "is" ARG ARITHMETICOP ARG;
+LOGICPREDICATE      : ARG LOGICOP ARG;
+ARITHMETICOP        : "+" | "-" | "*" | "/";
+LOGICOP             : ">" | "<" | ">=" | "<=" | "==" | "\=";
+PREDICATENAME       : NATIVE | CUSTOM;
+NATIVE              : "rdf11:rdf_has" | "rdf11:rdf_assert" | "rdf_canonical_literal" | "xsd2double" | "true" | "fail";
+CUSTOM              : TRACE | BUILTIN;
+TRACE               : "inf_trace" | "inf_trace_nl";
+BUILTIN             : "sppco" | "spco";
+LISTARGS            : ARG | "' '" | "'| '" | LISTARGS "," ARG;
+terminals
+TITLE               : /[a-zA-Z0-9_]+/;
+SUFFIX              : /,|\./;
+ARG                 : /[a-zA-Z0-9_:'\."\^'\#\/]+/;

@@ -1,0 +1,14 @@
+RULE                : ANTECEDENT "->" CONSEQUENT;
+LISTPREDICATES      : PREDICATE | LISTPREDICATES "," PREDICATE;
+ANTECEDENT          : LISTPREDICATES;
+CONSEQUENT          : LISTPREDICATES;
+PREDICATE           : PREDICATENAME "(" LISTARGS ")" | "!" PREDICATE;
+LISTARGS            : ARG | LISTARGS "," ARG;
+PREDICATENAME       : BUILTINPREDICATES | CLASSORPROPERTY;
+BUILTINPREDICATES   : ARITHMETIC | LOGIC | FUNCTIONALS;
+ARITHMETIC          : "multiply" | "divide" | "add" | "subtract";
+LOGIC               : "greaterThan" | "equal" | "notEqual";
+FUNCTIONALS         : "sppco" | "spco";
+terminals
+CLASSORPROPERTY     : /[a-zA-Z0-9_]+:[a-zA-Z0-9_]+/;
+ARG                 : /([a-zA-Z0-9_:\.]+) | ("[a-zA-Z0-9_]+"\^\^'http:\/\/www\.w3\.org\/2001\/XMLSchema\#[a-z]+')/;
